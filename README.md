@@ -7,4 +7,4 @@
 ##### So you should make model using pytorch or contact us directly.
 
 ##### If you make or get some model, you just put your model to "ti/static/ti" folder.
-##### Your model's name should be "character_50.pth" or you adjust "ti/veiws.py" file.
+##### Your model's name should be "character_50.pth" or you should adjust "ti/veiws.py" file.
