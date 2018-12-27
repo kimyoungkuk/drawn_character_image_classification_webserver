@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Painter</title>
+  <h1>너의 그림은</h1>
+  <style type="text/css">
+    canvas{border: 1px solid black};
+  </style>
+</head>
+<body>
+
+  <div>
+    <canvas id="canvas" width="500" height="500">
+    </canvas>
+    {% load staticfiles %}
+<!--
+    <img src="{% static 'ti/pic.png' %}">
+    <img src="{% static 'ti/pic2.png' %}">
+    <img src="{{message}}">
+-->
+
+<script type="text/javascript">
+function fromDataURL(ctx){
+  // var copyCanvas = document.getElementById('copyCanvas');
+  // var copyContext = copyCanvas.getContext('2d');
+  //copyContext.drawImage(canvas,0,0);
+  var image = new Image();
+  image.src = "{% static 'ti/drawpic.png' %}";
+  image.onload = function(){
+    ctx.drawImage(image,0,0);
+  }
+}
+</script>
+
+<!--
+    <img src="{% static 'ti/drawpic.png' %}">
+-->
+
+
+
+    <div style="float:right;width:150px;height:250px;">{{label1}}<div>{{probl1}}</div></div>
+    <div style="float:right;width:150px;height:250px;">{{label2}}<div>{{probl2}}</div></div>
+    <div style="float:right;width:150px;height:250px;">{{label3}}<div>{{probl3}}</div></div>
+
+  </div>
+
+  {% load staticfiles %}
+  <script type="text/javascript" src="{% static 'ti/cv.js' %}">
+
+  </script>
+
+
+
+
+<!--
+    <input type="button" value="teach me what it is" onclick="printcan();"/>
+    <script type="text/javascript">
+    function printcan(){
+      var myImage = document.getElementById('myImage');
+      myImage.src = canvas.toDataURL();
+    }
+    </script>
+    <img id="myImage" src="canvas.toDataURL();">
+-->
+
+
+
+    <div><form action="" method="post" id="frm" enctype="multipart/form-data"></div>
+      {% csrf_token %}
+      <input type="hidden" id="canvasData" name="canvasData">
+      <input type='submit' value="submit" onclick='updateData();'>
+    </form>
+<!--
+    <input type='button' value="update" onclick='updateData();'>
+-->
+    <input type='button' value="eraser" onclick='erase();'>
+    <script type="text/javascript">
+    function erase(){
+      var canvas, ctx;
+      canvas = document.getElementById("canvas");
+      ctx = canvas.getContext("2d");
+      ctx.fillStyle = 'white'; // 채우기 색 지정
+      ctx.globalAlpha = "1.0"; // 채우기 투명도 설정
+      ctx.fillRect(0,0,500,500);
+    }
+
+    </script>
+
+
+
+<!--
+    <div id="qwe">qwe</div>
+    <div id="tf"></div>
+    <div id="what"></div>
+-->
+
+
+    {% csrf_token %}
+    <script type="text/javascript">
+    function updateData(){
+      //document.getElementById('qwe').innerHTML = canvas.toDataURL();
+      var cD = document.getElementById('canvasData');
+      cD.value = canvas.toDataURL();
+      //document.getElementById('tf').innerHTML = cD.value;
+      //$('#canvasData')[0].value = $('canvas')[0].toDataURL();
+      //ocument.getElementById('tf').innerHTML = $('#canvasData')[0].value
+    }
+
+    </script>
+
+</body>
+</html>
